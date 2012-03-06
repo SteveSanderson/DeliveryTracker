@@ -1,0 +1,13 @@
+#User Settings
+*.suo
+*.user
+
+#Temporary files
+*.bak
+
+#Folders
+bin/
+obj/
+App_Data/
+packages/
+_ReSharper.*/
