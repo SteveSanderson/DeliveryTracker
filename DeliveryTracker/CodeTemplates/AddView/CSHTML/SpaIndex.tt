@@ -1,0 +1,34 @@
+<#@ template language="C#" HostSpecific="True" #>
+<#@ output extension=".cshtml" #>
+<#@ assembly name="Microsoft.CSharp" #>
+<#
+    MvcTextTemplateHost mvcHost = (MvcTextTemplateHost)(Host);
+    var modelTypeName = mvcHost.ModelType.Name;
+    var modelTypeNamespace = mvcHost.ModelType.Namespace;
+    var contextName = mvcHost.ExtendedProperties.ContextName;
+    var modelTypePluralized = mvcHost.ExtendedProperties.ModelTypePluralized;
+    var contextControllerTypeFullName = mvcHost.ExtendedProperties.ContextControllerTypeFullName;
+    var relatedModels = mvcHost.RelatedProperties.Values;
+#>
+@using <#= modelTypeNamespace #>
+@{
+    ViewBag.Title = "<#= modelTypePluralized #>";
+    Layout = "~/Views/Shared/_SpaLayout.cshtml";
+}
+
+@Html.Partial("_Grid")
+@Html.Partial("_Editor")
+
+@(Html.UpshotContext(bufferChanges: true)
+      .DataSource<<#= contextControllerTypeFullName #>>(x => x.Get<#= modelTypePluralized #>())
+<# foreach (var relatedModel in relatedModels) { #>
+      .DataSource<<#= contextControllerTypeFullName #>>(x => x.Get<#= relatedModel.PropertyName #>OptionsFor<#= modelTypeName #>())
+<# } #>
+      .ClientMapping<<#= modelTypeName #>>("<#= modelTypeName #>"))
+
+<script type="text/javascript" src="~/Scripts/<#= modelTypePluralized #>ViewModel.js"></script>
+<script type="text/javascript">
+    $(function () {
+        ko.applyBindings(new <#= modelTypePluralized #>ViewModel());
+    });
+</script>

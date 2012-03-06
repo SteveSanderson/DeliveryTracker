@@ -1,0 +1,12 @@
+﻿<div class="content">
+    <label><input data-bind="checked: excludeDelivered" type="checkbox" /> Only show undelivered items</label>
+
+    <ol class="deliveries" data-bind="foreach: deliveries">
+
+        <li data-bind="css: { updated: IsUpdated, delivered: IsDelivered }, click: $root.showDelivery">
+            <span data-bind="text: Description"></span>
+            <span class="details" data-bind="text: Customer().Name"></span>
+        </li>
+
+    </ol>
+</div>

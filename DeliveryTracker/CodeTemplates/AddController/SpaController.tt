@@ -1,0 +1,19 @@
+﻿<#@ template language="C#" HostSpecific="True" #>
+<#
+MvcTextTemplateHost mvcHost = (MvcTextTemplateHost)(Host);
+#>
+using System.Web.Mvc;
+
+namespace <#= mvcHost.Namespace #>
+{
+    public class <#= mvcHost.ControllerName #> : Controller
+    {
+        //
+        // GET: <#= (!String.IsNullOrEmpty(mvcHost.AreaName)) ? ("/" + mvcHost.AreaName) : String.Empty #>/<#= mvcHost.ControllerRootName #>/
+
+        public ActionResult Index()
+        {
+            return View();
+        }
+    }
+}

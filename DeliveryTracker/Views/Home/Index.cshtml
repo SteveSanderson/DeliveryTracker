@@ -1,0 +1,41 @@
+@using DeliveryTracker.Controllers
+@section featured {
+<section class="featured">
+    <div class="content-wrapper">
+        <hgroup class="title">
+            <h1>Welcome to my Single Page Application</h1>
+        </hgroup>
+    </div>
+</section>
+}
+@(Html.UpshotContext(bufferChanges: true).DataSource<DataServiceController>(x => x.GetDeliveriesForToday()))
+
+<label><input data-bind="checked: excludeDelivered" type="checkbox"/> Hide delivered items</label>
+<button data-bind="click: saveAll">Save all</button>
+<button data-bind="click: revertAll">Revert all</button>
+
+
+<ol data-bind="foreach: deliveries">
+    <li data-bind="css: { delivered: IsDelivered, updated: IsUpdated }">
+        <strong data-bind="text: Description"></strong>
+        for <em data-bind="text: Customer().Name"></em>
+        <label><input data-bind="checked: IsDelivered" type="checkbox"/> Delivered</label>
+    </li>
+</ol>
+
+<h3>Customers</h3>
+<ul data-bind="foreach: deliveriesForCustomer">
+    <li>
+        <div>Name: <strong data-bind="text: key.Name"></strong></div>
+        <ul data-bind="foreach: values">
+            <li data-bind="text: Description, css: { delivered: IsDelivered, updated: IsUpdated }"></li>
+        </ul>
+    </li>
+</ul>
+
+<script src="~/Scripts/App/DeliveriesViewModel.js" type="text/javascript"></script>
+<script type="text/javascript">
+    $(function () {
+        ko.applyBindings(new DeliveriesViewModel());
+    });
+</script>

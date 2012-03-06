@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8" />
+        <title>Delivery Tracker</title>
+        <link href="~/favicon.ico" rel="shortcut icon" type="image/x-icon" />
+        <link href="@System.Web.Optimization.BundleTable.Bundles.ResolveBundleUrl("~/Content/css")" rel="stylesheet" type="text/css" />
+        @Html.Partial("_SpaScripts")
+    </head>
+    <body>
+        <header>
+            <div class="content-wrapper">
+                <div class="float-left">
+                    <p class="site-title">@Html.ActionLink("delivery tracker", "Index", "Home")</p>
+                </div>
+                <div class="float-right">
+                    <section id="login">
+                    </section>
+                    <nav>
+                        <ul id="menu">
+                            <li>@Html.ActionLink("Home", "Index", "Home")</li>
+                        </ul>
+                    </nav>
+                </div>
+            </div>
+        </header>
+        <div id="body">
+            @RenderSection("featured", required: false)
+            <section class="content-wrapper main-content clear-fix">
+                @RenderBody()
+            </section>
+        </div>
+        <footer>
+            <div class="content-wrapper">
+                <div class="float-left">
+                    <p>&copy; @DateTime.Now.Year - You</p>
+                </div>
+            </div>
+        </footer>
+    </body>
+</html>

@@ -1,0 +1,22 @@
+﻿<div class="title bar">
+    <button data-bind="click: History.back">&lt; Back</button>
+    <h1 data-bind="text: Description"></h1>
+</div>
+
+<div class="content">
+    <p>Delivery #<strong data-bind="text: DeliveryId"></strong></p>
+
+    <div class="callout" data-bind="with: Customer">
+        <h1>Customer</h1>
+
+        <label>Name</label>
+        <strong data-bind="text: Name"></strong>
+        
+        <label>Address</label>
+        <strong data-bind="text: Address"></strong>
+    </div>
+    
+    <label class="checkbox" data-bind="css: { delivered: IsDelivered }">
+        <input type="checkbox" data-bind="checked: IsDelivered" /> Delivered
+    </label>
+</div>

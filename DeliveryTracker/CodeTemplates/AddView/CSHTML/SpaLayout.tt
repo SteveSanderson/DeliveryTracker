@@ -1,0 +1,11 @@
+@{ Layout = "~/Views/Shared/_Layout.cshtml"; }
+
+<link href="~/Content/Spa.css" rel="stylesheet" type="text/css" />
+<script src="~/Scripts/knockout.js" type="text/javascript"></script>
+<script src="~/Scripts/upshot.js" type="text/javascript"></script>
+<script src="~/Scripts/upshot.compat.knockout.js" type="text/javascript"></script>
+<script src="~/Scripts/upshot.knockout.extensions.js" type="text/javascript"></script>
+<script src="~/Scripts/native.history.js" type="text/javascript"></script>
+<script src="~/Scripts/nav.js" type="text/javascript"></script>
+
+@RenderBody()

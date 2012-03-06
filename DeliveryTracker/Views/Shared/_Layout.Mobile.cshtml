@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8" />
+        <title>Deliveries</title>
+        <link href="~/favicon.ico" rel="shortcut icon" type="image/x-icon" />
+        <link href="~/Content/Site.Mobile.css" rel="stylesheet" type="text/css" />
+        @Html.Partial("_SpaScripts")
+    </head>
+    <body>
+        <nav class="bar">
+            <ul>
+                <li data-bind="click: showDeliveries, 
+                               css: { active: nav.params().view == 'deliveries' }">Deliveries</li>
+                <li data-bind="click: showCustomers, 
+                               css: { active: nav.params().view == 'customers' }">Customers</li>
+            </ul>
+        </nav>
+
+        @RenderBody()
+    </body>
+</html>

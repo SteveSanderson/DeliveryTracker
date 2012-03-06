@@ -1,0 +1,27 @@
+﻿.added { background-color: rgb(180,255,180) }
+.updated { background-color: rgb(255,255,180) }
+.deleted { background-color: rgb(255,180,180) }
+tr.error { font-weight: bold; }
+
+.overlay {
+    position: absolute; left: 0; top: 0; right: 0; bottom: 0; 
+    background-color: rgba(0,0,0,0.3) 
+}
+
+.overlay form {
+    width: 600px; margin: 100px auto 0 auto; padding: 30px;
+    border-radius: 15px; 
+    background-color: White;  
+    box-shadow: 0 5px 10px rgba(0,0,0,0.5) 
+}
+
+/* Reset some styles applied by the default Site.css */
+fieldset {
+    border: 1px solid silver; 
+    margin: 0px; 
+    padding: 2px 20px; 
+}
+
+    fieldset legend {
+        display: block;
+    }

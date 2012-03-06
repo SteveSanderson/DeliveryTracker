@@ -1,0 +1,7 @@
+<#@ template language="C#" HostSpecific="True" #>
+<#@ output extension=".cshtml" #>
+<#@ assembly name="Microsoft.CSharp" #>
+<#
+    MvcTextTemplateHost mvcHost = (MvcTextTemplateHost)(Host);
+#>
+<!-- This file is not being used in the current preview release. You may safely delete it. -->

@@ -1,0 +1,53 @@
+﻿<#@ template language="C#" HostSpecific="True" #>
+<#@ assembly name="Microsoft.CSharp" #>
+<#@ import namespace="System.Collections" #>
+<#@ import namespace="System.Collections.Generic" #>
+<#@ import namespace="System.Linq" #>
+<#
+    MvcTextTemplateHost mvcHost = (MvcTextTemplateHost)(Host);
+    var contextProperty = mvcHost.ExtendedProperties.IsDbContext ? "DbContext" : "ObjectContext";
+    var controllerType = mvcHost.ExtendedProperties.IsDbContext ? "DbDataController" : "LinqToEntitiesDataController";
+    var contextControllerTypeName = mvcHost.ExtendedProperties.ContextControllerTypeName;
+    var contextTypeFullName = mvcHost.ContextType.FullName;
+    var modelTypeName = mvcHost.ModelType.Name;
+    var modelTypeFullName = mvcHost.ModelType.FullName;
+    var modelTypePluralized = mvcHost.ExtendedProperties.ModelTypePluralized;
+    var primaryKeyName = mvcHost.PrimaryKeys[0].Name;
+    var relatedEntities = mvcHost.ExtendedProperties.RelatedEntities;
+    var includeExpressions = String.Empty;
+    foreach (var relatedEntity in relatedEntities) {
+        includeExpressions += String.Format(".Include(\"{0}\")", relatedEntity.RelationName);
+    }
+    var lambdaVar = modelTypeName.ToLower()[0];
+#>
+using System.Linq;
+using System.Web.Http;
+using System.Web.Http.Data.EntityFramework;
+
+namespace <#= mvcHost.Namespace #>
+{
+    public partial class <#= contextControllerTypeName #> : <#= controllerType #><<#= contextTypeFullName #>>
+    {
+        public IQueryable<<#= modelTypeFullName #>> Get<#= modelTypePluralized #>() {
+            return <#= contextProperty #>.<#= modelTypePluralized #><#= includeExpressions #>.OrderBy(<#= lambdaVar #> => <#= lambdaVar #>.<#= primaryKeyName #>);
+        }
+
+        public void Insert<#= modelTypeName #>(<#= modelTypeFullName #> entity) {
+            InsertEntity(entity);
+        }
+
+        public void Update<#= modelTypeName #>(<#= modelTypeFullName #> entity) {
+            UpdateEntity(entity);
+        }
+
+        public void Delete<#= modelTypeName #>(<#= modelTypeFullName #> entity) {
+            DeleteEntity(entity);
+        }
+<# foreach (var relatedEntity in relatedEntities) { #>
+
+        public IQueryable<<#= relatedEntity.TypeFullName #>> Get<#= relatedEntity.RelationName #>OptionsFor<#= modelTypeName #>() {
+            return <#= contextProperty #>.<#= relatedEntity.TypeNamePluralized #>;
+        }
+<# } #>
+    }
+}

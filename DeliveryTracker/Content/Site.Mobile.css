@@ -1,0 +1,49 @@
+﻿body {
+    background-color: #eee;
+    color: #555;
+    font-family: Helvetica, Arial, Segoe UI;
+    padding: 0; margin: 0;
+}
+
+.bar {
+    margin: 0; box-shadow: 0 2px 8px #999; padding: 8px; position: fixed;width: 100%;height: 33px;color: white;
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.4);
+    background: #ff3019; /* Old browsers */
+    background: -moz-linear-gradient(top, #ff3019 0%, #cf0404 100%); /* FF3.6+ */
+    background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#ff3019), color-stop(100%,#cf0404)); /* Chrome,Safari4+ */
+    background: -webkit-linear-gradient(top, #ff3019 0%,#cf0404 100%); /* Chrome10+,Safari5.1+ */
+    background: -o-linear-gradient(top, #ff3019 0%,#cf0404 100%); /* Opera 11.10+ */
+    background: -ms-linear-gradient(top, #ff3019 0%,#cf0404 100%); /* IE10+ */
+    background: linear-gradient(top, #ff3019 0%,#cf0404 100%); /* W3C */
+    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ff3019', endColorstr='#cf0404',GradientType=0 ); /* IE6-9 */    
+}
+
+nav ul { margin: 0; padding: 0; }
+    nav ul li { padding: 4px 12px;display: inline-block;color: #eee;font-size: 20px;font-weight: bold; cursor: pointer;border-radius: 16px; }
+        nav ul li.active { cursor: default; color: white;background-color: rgba(255, 255, 40, 0.5);box-shadow: inset 1px 1px 3px rgba(0,0,0,0.25); sbackground: -webkit-linear-gradient(top, rgba(255, 255, 0, 0.4) 40%, rgba(255, 255, 0, 0.5) 100%); }
+
+.title h1 { margin: 4px 0 0px 90px;padding: 0;font-size: 20px;vertical-align: middle; white-space: nowrap;overflow: hidden; text-overflow: ellipsis }
+.title button { position: absolute;width: 75px;margin: 0; }
+    
+.content { padding: 50px 16px 0 16px;}
+            
+.updated { background-color: yellow }
+.deliveries {list-style-position:inside ; padding: 0; margin-bottom: 30px; background-color: white; border-bottom: 1px solid silver; border-radius: 16px; box-shadow: 0 2px 5px #999 }
+    .deliveries li { font-weight: bold;cursor: pointer; border: 1px solid silver;padding: 14px 14px 10px 14px;border-bottom: none; }
+        .deliveries li:first-child { border-top-left-radius: 16px; border-top-right-radius: 16px; }
+        .deliveries li:last-child { border-bottom-left-radius: 16px; border-bottom-right-radius: 16px; }
+        .deliveries li:hover { background-color: #FFB; }
+        .deliveries li.delivered { font-weight: normal;text-decoration: line-through; color: #777 }
+
+.details { font-weight: normal;margin-left: 16px;display: block;padding-top: 4px;font-size: 90%;color: #777; }
+        
+h4 { margin: 18px 0 6px 0px;color: #666; text-shadow: 1px 2px 1px white; }
+
+.callout { background-color: white;padding: 16px; border-radius: 16px; box-shadow: 0 2px 5px #999 }
+    .callout h1 { background-color: #D20;margin: -16px -16px 16px -16px;padding: 8px 6px 6px 16px;color: white;font-size: 20px;  border-radius: 16px 16px 0 0; }
+    
+label { display: block;margin-top: 16px;margin-bottom: 16px; }
+    label.checkbox { background-color: white;padding: 12px;font-size: 19px;border-radius: 14px;cursor: pointer; box-shadow: 0 2px 5px #999 }
+    label.delivered { background-color: #080;color: white; }
+    
+button { background-color: white; padding: 6px 10px;font-size: 14px;font-weight: bold; border-radius: 14px;cursor: pointer;border: 1px solid #ddd; box-shadow: 0 2px 5px #999 }

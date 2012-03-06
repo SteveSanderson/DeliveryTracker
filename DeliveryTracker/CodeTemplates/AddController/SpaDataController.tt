@@ -1,0 +1,42 @@
+﻿<#@ template language="C#" HostSpecific="True" #>
+<#@ assembly name="Microsoft.CSharp" #>
+<#
+    MvcTextTemplateHost mvcHost = (MvcTextTemplateHost)(Host);
+    var controllerType = mvcHost.ExtendedProperties.IsDbContext ? "DbDataController" : "LinqToEntitiesDataController";
+    var contextName = mvcHost.ExtendedProperties.ContextName;
+    var contextControllerTypeName = mvcHost.ExtendedProperties.ContextControllerTypeName;
+    var contextTypeFullName = mvcHost.ContextType.FullName;
+#>
+using System.Net.Http;
+using System.Threading;
+using System.Threading.Tasks;
+using System.Web.Http;
+using System.Web.Http.Data.EntityFramework;
+using System.Web.Mvc;
+using System.Web.Routing;
+
+namespace <#= mvcHost.Namespace #>
+{
+    public partial class <#= contextControllerTypeName #> : <#= controllerType #><<#= contextTypeFullName #>>
+    {
+        // Any code added here will apply to all entity types managed by this data controller
+    }
+
+    // This provides context-specific route registration
+    public class <#= contextName #>RouteRegistration : AreaRegistration
+    {
+        public override string AreaName
+        {
+            get { return "<#= contextName #>"; }
+        }
+
+        public override void RegisterArea(AreaRegistrationContext context)
+        {
+			RouteTable.Routes.MapHttpRoute(
+                "<#= contextName #>", // Route name
+                "api/<#= contextName #>/{action}", // URL with parameters
+                new { controller = "<#= contextName #>" } // Parameter defaults
+            );
+        }
+    }
+}
